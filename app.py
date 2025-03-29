@@ -1,6 +1,4 @@
 from flask import Flask, request, render_template
-import requests
-from bs4 import BeautifulSoup
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -21,23 +19,10 @@ DISTRESS_THRESHOLD = 1  # Set your threshold here
 # Load environment variables
 load_dotenv()
 
-# Twitter OAuth 1.0a credentials (loaded from environment variables for security)
-API_KEY = os.environ.get("API_KEY")
-API_KEY_SECRET = os.environ.get("API_KEY_SECRET")
-ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
-ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
 # Bearer Token for X API v2
 BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
 
-# Setup Tweepy authentication for v1.1 API (kept for consistency, though unused now)
-auth = tweepy.OAuth1UserHandler(
-    consumer_key=API_KEY,
-    consumer_secret=API_KEY_SECRET,
-    access_token=ACCESS_TOKEN,
-    access_token_secret=ACCESS_TOKEN_SECRET
-)
-api = tweepy.API(auth, wait_on_rate_limit=True)
 
 # Setup Tweepy Client for v2 API (for fetching tweets)
 client = tweepy.Client(bearer_token=BEARER_TOKEN)
@@ -90,6 +75,8 @@ def fetch_user_tweets(username, max_tweets=10):
 ensure_nltk_resource('tokenizers/punkt', 'punkt')
 ensure_nltk_resource('corpora/stopwords', 'stopwords')
 ensure_nltk_resource('corpora/wordnet', 'wordnet')
+ensure_nltk_resource('sentiment/vader_lexicon', 'vader_lexicon')
+
 
 # Initialize tools with error handling
 try:
@@ -104,19 +91,11 @@ sia = SentimentIntensityAnalyzer()
 
 # Load concern keywords from file
 file_path = "concern_keywords.txt"  # Ensure file exists in same directory
-try:
-    with open(file_path, "r", encoding="utf-8") as file:
-        concern_keywords = {line.strip().lower() for line in file if line.strip()}
-except FileNotFoundError:
-    print(f"Warning: {file_path} not found. Using default keywords.")
-    concern_keywords = {
-        "stress", "stressed", "hate", "hated", "depressing", "depressed", "sad", "angry",
-        "anxious", "worried", "scared", "alone", "lonely", "isolated", "down", "miserable",
-        "hopeless", "tired", "exhausted", "overwhelmed", "frustrated", "mad", "nervous",
-        "empty", "numb", "lost", "despair", "failure", "worthless", "guilty", "ashamed",
-        "tense", "burnout", "pressure", "sick", "fedup", "bleak", "panic", "terrified",
-        "useless", "drained", "weak", "trapped", "help", "end", "die", "crisis"
-    }
+with open(file_path, "r", encoding="utf-8") as file:
+    lines = file.readlines()
+    concern_keywords = [line.strip() for line in lines] 
+
+
 
 # Analyze a post
 def analyze_post(post, threshold=0.05):
