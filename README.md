@@ -1,53 +1,136 @@
-<!-- Refined Readme.md with AI -->
-# Social Media Post Distress Alert
+# Mental Health Guardian
 
-This is a basic Python script that analyzes social media posts to detect signs of negative emotions or distress. It uses natural language processing (NLP) techniques to identify concerning keywords and sentiment, then alerts accordingly.
+## 📌 Overview
+The **Mental Health Guardian** project is a proactive web application designed to analyze social media activity to detect potential signs of emotional distress. It leverages **Natural Language Processing (NLP)** techniques and **Twitter/X API** integration to assess sentiment, identify concerning language patterns, and recognize crisis-related keywords.
 
-## Current Functionality
-- **Manual Input**: Copy and paste the content of a social media post into the terminal.
-- **Distress Detection**: The script checks for negative sentiment and predefined concern keywords (e.g., "stress," "sad," "hopeless") to flag potential distress.
-- **Output**: Displays keywords, named entities, sentiment score, and an alert if distress is detected.
+The tool provides actionable insights through an intuitive dashboard, including **sentiment visualizations, risk-level assessments, and support recommendations**, enabling early intervention for mental health awareness.
 
-## Future Enhancements
-- **Real-Time Integration**: Connect to social media APIs (e.g., Twitter/X) to analyze posts in real time by running the script on a server.
-- **User Feed Improvement**: Adjust content recommendations to avoid amplifying negative emotions, prioritizing positive or neutral content.
-- **Escalation Alerts**: Notify the user’s friends or support network if severe distress patterns persist.
+---
 
-## How to Duplicate the Project
-Follow these steps to set up and run the project on your machine:
+## 🚀 Features
+- **Scrape social media posts** using APIs and web scraping.
+- **Perform sentiment analysis** using NLTK's VADER and spaCy.
+- **Detect distress-related keywords** using a predefined list.
+- **User-friendly Flask web interface** for testing.
 
-1. **Clone or Copy the Project**:
-   - Copy the project folder to your local machine and open it in your preferred code editor (e.g., VS Code, PyCharm).
+---
 
-2. **Install Required Libraries**:
-   - Install the dependencies listed in `requirements.txt`:
-     ```bash
-     pip install -r requirements.txt
-   - Download the spaCy language model:
-     ```bash
-     python -m spacy download en_core_web_md  
-----------------------------------------------------------------
+## 🛠️ Technologies Used
+- **Flask** (Web Framework)
+- **NLTK & spaCy** (NLP Processing)
+- **Tweepy** (Twitter/X API for fetching posts)
+- **Python-dotenv** (Environment variable management)
 
+---
 
+## 📂 Project Structure
+```
+📁 Mental Health Guardian
+│── app.py                # Main Flask application
+│── requirements.txt       # Required dependencies
+│── templates/
+│   ├── index.html         # Web UI for input and results
+│── static/
+│   ├── style.css          # Stylesheets
+│── .env                   # API keys & environment variables
+│── README.md              # Project documentation
+```
 
-<!-- Raw Readme.md written -->
+---
 
+## ⚙️ Installation & Setup
 
-<!-- # Social Media Post distress Alert
+### 🔹 Step 1: Clone the Repository
+```bash
+git clone https://github.com/yourusername/mental-health-guardian.git
+cd mental-health-guardian
+```
 
-This is just a basic script that detects the presence of any negative things in the social media posts and alerts them accordingly.
+### 🔹 Step 2: Create a Virtual Environment (Optional but Recommended)
+```bash
+conda create -n meantalenv  # Create a virtual environment
+conda activate meantalenv  # Activate
+```
 
-- Currently just have to copy paste the post content and it will detects the presence of any negative things in the social media posts and alerts
-- In the future can integrate with social media application API and run the script on server real time to danalyse the posts regularly on real time. 
-- And also improve the user feed according to it rather than shoing them more according to the recommendation system and if the case gets worse then alert the user's friends too with him.
+### 🔹 Step 3: Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
+### 🔹 Step 4: Download Required NLP Models
+```python
+import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
+nltk.download("wordnet")
+nltk.download("vader_lexicon")
+```
+```bash
+python -m spacy download en_core_web_sm
+```
 
+### 🔹 Step 5: Set Up API Keys (Twitter, Twilio, Telegram)
+Create a `.env` file in the project root and add:
+```env
+BEARER_TOKEN = your_bearer_token
+```
 
+---
 
+## ▶️ Running the Application
+```bash
+python app.py
+```
+- Open your browser and visit: **http://127.0.0.1:5000/**
 
-## How to duplicate the Project
-1. Copy paste the folder and open it in editor
-2. Install the required libraries in the project  
-` pip install -r requirements.txt`
-3. Run the **main.py** file.
-4. Copy paste the post content in the terminal to analyse it.  -->
+---
+
+## 🚨 How It Works
+1. The user enters or scrapes a social media post.
+   ![alt text](<Screenshot 2025-03-30 005103.png>)
+2. The system tokenizes the text, removes stopwords, and lemmatizes words.
+3. **Sentiment Analysis** is performed using **NLTK’s VADER**.
+4. If the post contains **distress keywords** (e.g., "depressed", "hopeless", "suicidal"), an alert is triggered.
+   ![alt text](<Screenshot 2025-03-30 005232.png>)
+   ![alt text](<Screenshot 2025-03-30 005256.png>)
+   ![alt text](<Screenshot 2025-03-30 005322.png>)
+
+---
+
+## 📜 Example Distress Keywords
+```python
+concern_keywords = {
+    "stress", "stressed", "depressed", "anxious", "hopeless", "miserable",
+    "alone", "numb", "worthless", "failure", "despair", "scared",
+    "burnout", "trapped", "useless", "end", "die", "crisis", "help"
+}
+```
+
+---
+
+## 📌 API Integration Details
+- **Twitter/X API**: Fetch user tweets using Tweepy.
+- Sign up on the X Developer Portal and get the bearer token after creating a project.
+- Free-tier has limited requests, but higher quotas are available in premium and paid plans.
+
+---
+
+## 💡 Future Enhancements
+- **Send alerts via social media DMs.**
+- **Implement machine learning models** for more accurate distress detection.
+- **Add real-time monitoring** for multiple social media platforms.
+- **Introduce user authentication** and dashboard for tracking alerts.
+- **Use Deep Learning (BERT, GPT-4)** for enhanced sentiment analysis.
+
+---
+
+## 🤝 Contributions
+Feel free to fork this repo, create issues, or submit pull requests.
+
+---
+
+## 📧 Contact
+For any questions, reach out to **pankajgoyal4152@gmail.com** or open an issue on GitHub.
+
+---
+
