@@ -87,13 +87,16 @@ python app.py
 
 ## 🚨 How It Works
 1. The user enters or scrapes a social media post.
-   ![alt text](<Screenshot 2025-03-30 005103.png>)
+![Screenshot 2025-03-30 005103](https://github.com/user-attachments/assets/a5b1aa2d-2441-4115-9387-182f27aa1188)
+
 2. The system tokenizes the text, removes stopwords, and lemmatizes words.
 3. **Sentiment Analysis** is performed using **NLTK’s VADER**.
 4. If the post contains **distress keywords** (e.g., "depressed", "hopeless", "suicidal"), an alert is triggered.
-   ![alt text](<Screenshot 2025-03-30 005232.png>)
-   ![alt text](<Screenshot 2025-03-30 005256.png>)
-   ![alt text](<Screenshot 2025-03-30 005322.png>)
+![Screenshot 2025-03-30 005232](https://github.com/user-attachments/assets/255b21ed-d820-4df7-976e-d2440fffe62c)
+![Screenshot 2025-03-30 005256](https://github.com/user-attachments/assets/7e9b2329-c45d-4f42-94ea-662af6c86af4)
+![Screenshot 2025-03-30 005322](https://github.com/user-attachments/assets/aff24392-8f9a-401f-9228-d0f046592f48)
+
+
 
 ---
 
